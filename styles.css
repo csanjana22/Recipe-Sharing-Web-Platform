@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'League Spartan', sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+.title {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Background image and overlay */
+.bgimage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.bgimage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.8);
+}
+
+.logo p{
+    font-family: 'Dancing Script', cursive;
+    font-size: 6rem;
+   font-weight: bolder;
+    padding: 12px;
+
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 20px;
+    margin-top: 20px; /* Slight margin for better separation */
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.search-bar input {
+    padding: 10px;
+    width: 440px;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 18px;
+    color: #333; /* Text color inside the input field */
+    border-radius: 20px 0 0 20px; /* Rounded corners on the left */
+}
+
+.search-bar input:focus {
+    border: 1px solid orange; /* Border change on focus for better UX */
+    transition: border 0.3s ease-in-out;
+}
+
+.search-button {
+    background-color: orange;
+    border-radius: 0 20px 20px 0; /* Rounded corners on the right */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.search-button i {
+    font-size: 18px;
+    color: white; /* White icon for better contrast */
+    padding: 10px;
+}
