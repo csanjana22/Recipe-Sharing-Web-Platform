@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <main>
@@ -16,15 +17,75 @@
             <div class="logo">
                 <p>Recipe Nest</p>
             </div>
-            <div class="search">
-                <div class="search-bar"><input type="text"></div>
-                <div class="search-button"><i class="fa-solid fa-magnifying-glass"></i></div>                
-            </div>
+            <form action="#" method="GET" class="search">
+                <div class="search-bar">
+                    <input type="text" name="query" placeholder="Search for recipes...">
+                </div>
+                <button type="submit" class="search-button">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>                
+            </form>
             <div class="filter">
-                <p>Advanced filter</p>
-                <i class="fa-solid fa-filter"></i>                
+                <button type="button" data-bs-toggle="modal" data-bs-target="#filterModal">
+                    <span>Advanced filter</span>
+                    <i class="fa-solid fa-filter"></i>   
+                </button>                             
+            </div>
+            <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="filterModalLabel">Filter Recipes</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#" method="GET">
+                                <div class="radio-group">
+                                    <div class="veg" >
+                                        <input type="radio" id="veg" name="type" value="veg" checked>
+                                        <label for="veg">Veg</label>
+                                    </div>                                   
+                                    <div class="non-veg">
+                                        <input type="radio" id="nonveg" name="type" value="nonveg">
+                                        <label for="nonveg">Non-Veg</label>
+                                    </div>                                    
+                                </div>
+                        
+                                <label for="cuisine">Select Cuisine:</label>
+                                <select id="cuisine" name="cuisine">
+                                    <option value="" disabled selected hidden>Choose Cuisine</option>
+                                    <option value="indian">Indian</option>
+                                    <option value="italian">Italian</option>
+                                    <option value="chinese">Chinese</option>
+                                    <option value="mexican">Mexican</option>
+                                </select>
+                        
+                                <label for="ingredients">Ingredients (comma separated):</label>
+                                <input type="text" id="ingredients" name="ingredients" placeholder="e.g., Tomato, Onion, Cheese">
+                        
+                                <label for="exclude">Exclude Ingredients:</label>
+                                <input type="text" id="exclude" name="exclude" placeholder="e.g., Nuts, Dairy">
+                        
+                                <label for="sort">Sort Recipes By:</label>
+                                <select id="sort" name="sort">
+                                    <option value="">Select Sorting</option>
+                                    <option value="time">Cooking Time</option>
+                                    <option value="ingredients_count">Number of Ingredients</option>
+                                </select> 
+                                <div class="buttons">
+                                    <button type="button" id="close-btn" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" id="apply-btn">Search Recipes</button>                                      
+                                </div> 
+                                                 
+                                
+                            </form>
+                        </div>
+        
+                    </div>
+                </div>
             </div>
         </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
