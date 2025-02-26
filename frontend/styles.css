@@ -11,7 +11,33 @@
 body {
     width: 100vw;
     height: 100vh;
+    overflow-x: hidden;
 }
+.upload-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    z-index: 20;
+}
+
+.upload-btn:hover {
+    background-color: rgb(204, 133, 1);
+    transform: scale(1.1);
+}
+
 
 .title {
     position: relative;
@@ -44,17 +70,15 @@ body {
 }
 
 .logo p{
-    font-family: 'Dancing Script', cursive;
     font-size: 8rem;
     font-weight: bolder;
-    padding: 12px;
-
+    color: white;
 }
 
 .search {
     display: flex;
     align-items: center;
-    border: 2px solid black;
+    border: 2px solid white;
     border-radius: 20px;
     margin-bottom: 30px;
 }
@@ -98,6 +122,11 @@ body {
     color: white; /* White icon for better contrast */
     padding: 15px;
 }
+
+.search-button:hover{
+    background-color:rgb(204, 133, 1);;
+}
+
 .filter{
    font-size: 30px;
 }
@@ -107,10 +136,9 @@ body {
     color: white;
     font-size: 2rem;
 }
-/* Filter Modal */
-/* =======================
-   Modal Styles 
-   ======================= */
+
+
+
 
 /* Ensure modal content is visible */
 .modal-content {
@@ -134,7 +162,7 @@ body {
     transition: all 0.3s ease-in;
 }
 .modal-header .btn-close:hover{
-    background-color: orange;/
+    background-color: orange;
 }
 /* Label Styling */
 .modal-body label {
@@ -166,7 +194,9 @@ body {
 
 /* Select & Input Fields */
 .modal-body select,
-.modal-body input {
+.modal-body input,
+.modal-body textarea,
+.modal-body .dropdown-btn {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -175,6 +205,24 @@ body {
     color: black; /* Ensure input text is visible */
     background: white; /* Maintain contrast */
 }
+.modal-body .dropdown-btn{
+    text-align: left;
+    opacity: 0.6;
+    font-weight:500; 
+    display: flex; 
+    justify-content: space-between; /* Push text left, icon right */
+    align-items: center; 
+}
+.dropdown-btn::after {
+    margin-left: auto; /* Push the caret icon to the right */
+}
+.modal-body .dropdown{
+    width: 100%;
+    position: relative;
+}
+.modal-body .dropdown-menu,.dropdown-item {
+    width: 100%; /* Ensures dropdown width matches button */
+}
 
 /* Make the default placeholder color match input placeholders */
 select {
@@ -182,7 +230,7 @@ select {
 }
 
 
-.buttons{
+#filterModal .buttons{
     display: flex;
     justify-content: flex-end;
     gap: 10px;
@@ -192,28 +240,237 @@ select {
 
 /* Modal Buttons */
 .modal-body button {
-    padding: 10px 15px;
+    font-size: 18px;
+    padding: 5px 13px;
     cursor: pointer;
     border-radius: 5px;
     transition: all 0.3s ease-in;
-    font-weight: 600;
+    font-weight: 700;
 }
-.modal-body #close-btn{
+
+.modal-body .close-btn,.back-btn,.add-btn{
     color: grey;
     background: transparent;
     border: 2px solid grey;
 }
-.modal-body #close-btn:hover{
-    color: white;
-    background: rgb(151, 151, 151);
+.modal-body .close-btn:hover,.back-btn:hover,.add-btn:hover{
+    color: orange;
+    border-color:orange ;
 
 }
-.modal-body #apply-btn{
+.modal-body .apply-btn,.next-btn{
     background: orange;      
     color: white;  
-    border: none;
+    border: 2px solid orange;
 }
-.modal-body #apply-btn:hover {
+.modal-body .apply-btn:hover,.next-btn:hover {
     background: rgb(204, 133, 1);
-    border: 1px solid orange;
+    border-color:  orange;
+}
+
+
+
+
+/* ADD RECIPES MODAL */
+
+/* Modal Styles */
+.modal-content {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Progress Steps
+.progress-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    margin: 50px auto;
+    position: relative;
+}
+
+.step {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
+
+.progress-container::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #ddd;
+    z-index: -1; 
+}
+
+.step.active {
+    border-color: orange;
+    background: orange;
+    color: white;
+} */
+
+#addRecipe1ModalToggle .buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+#addRecipe2ModalToggle2 .buttons{
+    display: flex;
+    justify-content: space-between;
+}
+#addRecipe3ModalToggle3 .buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+#addRecipe4ModalToggle4 .buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+.keywords-cuisine,.keywords-tag, .keywords-ingredient, .keywords-ingredient {
+    background: rgb(148, 147, 147);
+    font-size: 16px;
+    padding: 3px 7px;
+    border-radius: 5px;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    margin: 5px;
+}
+.keywords-cuisine .btn-close ,.keywords-tag .btn-close, .keywords-ingredient .btn-close, .keywords-ingredient .btn-close {
+    transform: scale(0.7);
+    margin: 0;
+    padding: 0;
+}
+
+.add-btn{
+    width: 120px;
+    font-size: 16px;
+    padding: 5px 13px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease-in;
+    font-weight: 700;
+    border: 1px solid gray;
+}
+.add-ing{
+    margin-top: 10px;
+    width: 135px;
+}
+#preview{
+    margin-top: 10px;
+    width: 100%;
+    height: 100px;
+}
+
+.modal-body img{
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+
+.recipes-section {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+.recipe-card {
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.recipe-card img {
+    height: 30vh;  /* Responsive height: 30% of viewport height */
+    object-fit: cover; /* Crop and fit images */
+    width: 100%; /* Make sure they stretch to full width */
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .recipe-card img {
+        height: 25vh;  /* Smaller height on mobile */
+    }
+}
+
+.container {
+    max-width: 100%;
+    padding: 0 20px;
+}
+/* Hover effect */
+.recipe-card:hover {
+    transform: scale(1.05); /* Slight zoom-in effect */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+}
+
+.recipe-card h3 {
+    font-size: 20px;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Cuisine Tag */
+.cuisine {
+    font-weight: bold;
+    color: #d35400;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+/* Tags Styling */
+.tags {
+    color: #555;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Description */
+.description {
+    font-size: 14px;
+    color: #666;
+    margin: 10px 0;
+}
+
+/* Button Styling */
+.details-btn {
+    background: #ff6b35;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.details-btn:hover {
+    background: #e65100;
+}
+.recipe-btn {
+    display: inline-block;
+    background-color: #ff5722; /* A warm orange shade */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.recipe-btn:hover {
+    background-color: #e64a19; /* Darker shade on hover */
 }
