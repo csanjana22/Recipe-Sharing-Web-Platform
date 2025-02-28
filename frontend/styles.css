@@ -69,6 +69,7 @@ a {
     box-shadow: none;
 }
 
+
 /* Mobile Dropdown Menu */
 @media (max-width: 992px) {
     .navbar-collapse {
