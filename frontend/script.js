@@ -1,3 +1,65 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const nextBtn1 = document.querySelector("#recipeForm1 .next-btn");
+    const nextBtn2 = document.querySelector("#recipeForm2 .next-btn");
+    const nextBtn3 = document.querySelector("#recipeForm3 .next-btn");
+    const backBtn2 = document.querySelector("#recipeForm2 .back-btn");
+    const backBtn3 = document.querySelector("#recipeForm3 .back-btn");
+    const backBtn4 = document.querySelector("#recipeForm4 .back-btn");
+
+    const form1 = document.getElementById("recipeForm1");
+    const form2 = document.getElementById("recipeForm2");
+    const form3 = document.getElementById("recipeForm3");
+    const form4 = document.getElementById("recipeForm4");
+
+    // Initially hide Step 2
+    form2.style.display = "none";
+    form3.style.display = "none";
+    form4.style.display = "none";
+
+    // Show Step 2 when clicking "Next"
+    nextBtn1.addEventListener("click", function () {
+        form1.style.display = "none";
+        form2.style.display = "block";
+        form3.style.display = "none";
+        form4.style.display = "none";
+    });
+
+    nextBtn2.addEventListener("click", function () {
+        form1.style.display = "none";
+        form3.style.display = "block";
+        form2.style.display = "none";
+        form4.style.display = "none";
+    });
+
+    nextBtn3.addEventListener("click", function () {
+        form1.style.display = "none";
+        form4.style.display = "block";
+        form3.style.display = "none";
+        form2.style.display = "none";
+    });
+
+    // Show Step 1 when clicking "Back"
+    backBtn2.addEventListener("click", function () {
+        form2.style.display = "none";
+        form3.style.display = "none";
+        form4.style.display = "none";
+        form1.style.display = "block";
+    });
+    backBtn3.addEventListener("click", function () {
+        form1.style.display = "none";
+        form3.style.display = "none";
+        form4.style.display = "none";
+        form2.style.display = "block";
+    });
+    backBtn4.addEventListener("click", function () {
+        form2.style.display = "none";
+        form1.style.display = "none";
+        form4.style.display = "none";
+        form3.style.display = "block";
+    });
+});
+
+
 let selectedCuisines = [];
 
     function selectCuisine(cuisine) {

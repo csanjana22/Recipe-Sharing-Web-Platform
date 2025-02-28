@@ -1,0 +1,396 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'League Spartan', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth; 
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    background-color: #f8f9fa;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Navbar */
+.navbar {
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+    padding: 12px 20px;
+    height: 70px;
+}
+
+.logo {
+    margin: 10px;
+}
+
+.logo-text {
+    font-family: 'Bubblegum Sans', cursive;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+/* Navbar Items */
+.nav-item {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 11px;
+    transition: 0.3s;
+}
+
+.nav-link {
+    font-size: 1.2rem;
+    color: black;
+    transition: color 0.3s;
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 165, 0, 0.2);
+    border-radius: 5px;
+}
+
+/* Navbar Toggler */
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* Mobile Dropdown Menu */
+@media (max-width: 992px) {
+    .navbar-collapse {
+        background-color: white;
+        padding: 10px;
+        box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.2);
+        border-radius: 0 0 10px 10px;
+    }
+}
+
+
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .image-section, .form-section {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .image-section img {
+        height: auto;
+    }
+}
+/* Smooth Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    border-radius: 5px;
+    border: 1px solid grey;
+    overflow: hidden;
+    animation: fadeIn 0.8s ease-in-out; 
+}
+.recipe-page {
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Image Section */
+.image-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    animation: fadeIn 1.2s ease-in-out;
+    min-height: 400px;
+}
+
+.image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fits without distortion */
+    border-radius: 5px;
+    transition: transform 0.3s ease-in-out, opacity 0.3s;
+}
+.image-section img:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* Form Section */
+.form-section {
+    flex: 1;
+    padding: 30px;
+    animation: fadeIn 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 400px;
+}
+
+
+/* h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.dropdown-btn {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.close-btn, .next-btn {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.close-btn {
+    background-color: gray;
+    color: white;
+}
+
+.next-btn {
+    background-color: orange;
+    color: white;
+} */
+h1 {
+    font-size: 1.5rem;
+    margin: 0px;
+}
+/* .btn-close{
+    transition: all 0.3s ease-in;
+}
+.btn-close:hover{
+    background-color: orange;
+} */
+/* Label Styling */
+label {
+    display: block;
+    margin: 10px 0px;
+}
+
+.radio-group label{
+    margin: 0;
+}
+/* Radio Button Group */
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.radio-group div {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between radio button and label */
+    flex: 0; /* Prevents unwanted stretching */
+    white-space: nowrap; /* Ensures text doesn't wrap */
+}
+.radio-group input {
+    accent-color: black; /* Custom color for radio buttons */
+}
+
+
+/* Select & Input Fields */
+select,
+input,
+textarea,
+.dropdown-btn {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: black; /* Ensure input text is visible */
+    background: white; /* Maintain contrast */
+}
+input:focus, 
+textarea:focus, 
+select:focus {
+    border: 2px solid black !important;
+    outline: none !important; /* Remove the default blue outline */
+    box-shadow: none !important; /* Ensure no glow effect */
+}
+.dropdown-btn{
+    text-align: left;
+    opacity: 0.6;
+    font-weight:500; 
+    display: flex; 
+    justify-content: space-between; /* Push text left, icon right */
+    align-items: center; 
+}
+.dropdown-btn::after {
+    margin-left: auto; /* Push the caret icon to the right */
+}
+.dropdown{
+    width: 100%;
+    position: relative;
+}
+.dropdown-menu,.dropdown-item {
+    width: 100%; /* Ensures dropdown width matches button */
+}
+
+/* Make the default placeholder color match input placeholders */
+select {
+    opacity: 0.7; /* Adjust to match input placeholder */
+}
+
+
+#recipeForm1 .buttons{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+
+/* Modal Buttons */
+button {
+    font-size: 18px;
+    padding: 5px 13px;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+    font-weight: 700;
+    transition: background-color 0.3s ease-in-out, transform 0.2s;
+}
+button:hover {
+    background-color: #ff8c00;
+    transform: scale(1.05);
+}
+
+.back-btn, .add-btn{
+    color: grey;
+    background: transparent;
+    border: 2px solid grey;    
+    border-radius: 5px;
+}
+.back-btn:hover, .add-btn:hover{
+    color: orange;
+    border-color:orange ;    
+    border-radius: 5px;
+
+}
+.apply-btn, .next-btn{
+    background: orange;      
+    color: white;  
+    border: 2px solid orange;    
+    border-radius: 5px;
+}
+.apply-btn:hover, .next-btn:hover {
+    background: rgb(204, 133, 1);
+    border-color:  orange;
+    border-radius: 5px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+/* #addRecipe2ModalToggle2 .buttons{
+    display: flex;
+    justify-content: space-between;
+}
+#addRecipe3ModalToggle3 .buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+#addRecipe4ModalToggle4 .buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+} */
+.keywords-cuisine,.keywords-tag, .keywords-ingredient, .keywords-ingredient {
+    background: rgb(148, 147, 147);
+    font-size: 16px;
+    padding: 3px 7px;
+    border-radius: 5px;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    margin: 5px;
+}
+.keywords-cuisine .btn-close ,.keywords-tag .btn-close, .keywords-ingredient .btn-close, .keywords-ingredient .btn-close {
+    transform: scale(0.7);
+    margin: 0;
+    padding: 0;
+}
+
+.add-btn{
+    width: 120px;
+    font-size: 16px;
+    margin-top: 10px;
+    padding: 5px 13px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease-in;
+    font-weight: 700;
+    border: 1px solid gray;
+}
+.add-ing{
+    margin-top: 10px;
+    width: 135px;
+}
+#preview{
+    margin-top: 10px;
+    width: 100%;
+    height: 100px;
+}

@@ -1,0 +1,126 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.recipe-container {
+    max-width: 60%;
+    width: 90%;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#recipeContent {
+    display: flex;
+    justify-content: space-between; /* Ensures equal spacing */
+    align-items: flex-start; /* Aligns both sections at the top */
+    width: 100%;
+    gap: 50px; /* Space between Ingredients and Steps */
+    padding: 20px;
+}
+
+#recipeIngredients, #recipeSteps {
+    width: 45%;
+    text-align: left;
+}
+
+#recipeIngredients ul, #recipeSteps ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+#recipeIngredients li, #recipeSteps li {
+    font-size: clamp(1rem, 3vw, 2rem);
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+
+
+/* Make images responsive */
+#recipeImg {
+    width: 100%;
+    max-width: 600px; /* Prevents oversized images */
+    height: auto;
+    display: block;
+    margin: 10px auto;
+    border-radius: 8px;
+}
+
+/* Recipe Title */
+h1 {
+    text-align: center; /* Centers the heading */
+    font-size: clamp(28px, 6vw, 3rem); /* Keeps the font size responsive */
+    margin-bottom: 15px;
+    color: #222;
+}
+
+/* Text Styling */
+p {
+    font-size: clamp(16px, 3vw, 2rem); /* Increased paragraph size */
+    line-height: 1.7;
+    color: #333;
+    text-align: center;
+}
+
+/* Sections (Ingredients, Steps, Notes) */
+h3 {
+    font-size: clamp(20px, 4vw, 2.5rem); /* Larger subheadings */
+    margin-top: 25px;
+    color: #007bff;
+    text-align: center;
+}
+.timer-container {
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 15vw;
+    margin: auto;
+}
+.clock {
+    width: 200px;
+    height: 200px;
+    border: 3px solid black;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+}
+.hand {
+    width: 3px;
+    height: 85px;
+    background: black;
+    position: absolute;
+    top: 15px;
+    left: 95px;
+    transform-origin: bottom;
+    transition: transform 1s linear;
+}
+.second-hand {
+    height: 85px;
+    background: red;
+    top: 15px;
+}
+.dot {
+    width: 5px;
+    height: 5px;
+    background: black;
+    border-radius: 50%;
+    position: absolute;
+}
+.timer-input {
+    margin-top: 10px;
+}

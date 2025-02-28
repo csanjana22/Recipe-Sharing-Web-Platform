@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Details</title>
+    <link rel="stylesheet" href="style.css"> <!-- Add your CSS -->
+</head>
+<body>
+    <div class="recipe-container">
+        <h1 id="recipeTitle"></h1>
+        <img id="recipeImg" src="" alt="Recipe Image">
+        <p><strong>Cuisine:</strong> <span id="recipeCuisine"></span></p>
+        <p><strong>Tags:</strong> <span id="recipeTags"></span></p>
+        <p><strong>Description:</strong> <span id="recipeDescription"></span></p>
+        <h3>Ingredients:</h3>
+        <p id="recipeIngredients"></p>
+        <h3>Steps:</h3>
+        <div id="recipeSteps"></div>
+        <h3>Notes:</h3>
+        <p id="recipeNotes"></p>
+        <div class="timer-container">
+            <h2>Cooking Timer</h2>
+            <div class="clock" id="clock">
+                <div class="hand" id="minuteHand"></div>
+                <div class="hand second-hand" id="secondHand"></div>
+            </div>
+            <br>
+            <div class="timer-input">
+                <label for="minutes">Set Timer (minutes): </label>
+                <input type="number" id="minutes" min="1" value="1">
+                <button onclick="startTimer()">Start</button>
+            </div>
+            <p id="timeLeft">Time Left: 0:00</p>
+
+            <audio id="alarmSound">
+                <source src="alarm-clock-short-6402.mp3" type="audio/wav">
+            </audio>
+        </div>
+        
+    </div>
+    
+    
+    
+    <script>
+        // Get recipe data from sessionStorage
+        // Get recipe data from sessionStorage
+        const recipeData = JSON.parse(sessionStorage.getItem('recipeData'));
+
+        if (recipeData) {
+            document.getElementById('recipeTitle').textContent = recipeData.name;
+            document.getElementById('recipeImg').src = recipeData.imageUrl;
+            document.getElementById('recipeCuisine').textContent = recipeData.cuisine;
+            document.getElementById('recipeTags').textContent = recipeData.tags;
+            document.getElementById('recipeDescription').textContent = recipeData.description;
+            document.getElementById('recipeNotes').textContent = recipeData.notes || "No additional notes.";
+
+             // Ingredients - Convert string into list
+            let ingredientsContainer = document.getElementById('recipeIngredients');
+            ingredientsContainer.innerHTML = "";
+            if (recipeData.ingredients) {
+                const ingredientsArray = recipeData.ingredients.split(',').map(item => item.trim());
+                const ul = document.createElement("ul");
+
+                ingredientsArray.forEach(item => {
+                    if (item) {
+                        const li = document.createElement("li");
+                        li.textContent = item;
+                        ul.appendChild(li);
+                    }
+                });
+
+                ingredientsContainer.appendChild(ul);
+            } else {
+                ingredientsContainer.innerHTML = "<p>No ingredients provided.</p>";
+            }
+            // Convert steps into a bullet list
+            const stepsContainer = document.getElementById('recipeSteps');
+            stepsContainer.innerHTML = ""; // Clear existing content
+
+            // Split steps by '→' and create a list
+            const stepsArray = recipeData.steps.split('→').map(step => step.trim());
+
+            const ul = document.createElement("ul");
+            stepsArray.forEach(step => {
+                if (step) {
+                    const li = document.createElement("li");
+                    li.textContent = step;
+                    ul.appendChild(li);
+                }
+            });
+
+            stepsContainer.appendChild(ul);
+        }
+        let timer;
+        let remainingTime;
+        let alarmSound = document.getElementById("alarmSound");
+
+        function startTimer() {
+            let minutes = document.getElementById("minutes").value;
+            remainingTime = minutes * 60;
+            updateTimerDisplay();
+
+            clearInterval(timer);
+            timer = setInterval(() => {
+                remainingTime--;
+                updateTimerDisplay();
+
+                if (remainingTime <= 0) {
+                    clearInterval(timer);
+                    alarmSound.play();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            let mins = Math.floor(remainingTime / 60);
+            let secs = remainingTime % 60;
+            document.getElementById("timeLeft").textContent = Time Left: ${mins}:${secs.toString().padStart(2, '0')};
+            
+            let minuteDeg = (360 * (mins % 60)) / 60;
+            let secondDeg = (360 * (secs % 60)) / 60;
+            document.getElementById("minuteHand").style.transform = rotate(${minuteDeg}deg);
+            document.getElementById("secondHand").style.transform = rotate(${secondDeg}deg);
+        }
+
+        function addClockDots() {
+    let clock = document.getElementById("clock");
+    for (let i = 0; i < 12; i++) {
+        let dot = document.createElement("div");
+        dot.classList.add("dot");
+        
+        // Correct angle calculation
+        let angle = (i * 30) * (Math.PI / 180);
+        
+        // Proper positioning
+        let x = 47 + Math.cos(angle) * 40; // Centered at 50px
+        let y = 47 + Math.sin(angle) * 40;
+
+        // Set dot position
+        dot.style.left = ${x}%;
+        dot.style.top = ${y}%;
+
+        clock.appendChild(dot);
+    }
+}
+
+        addClockDots();
+
+    </script>
+</body>
+</html>
