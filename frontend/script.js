@@ -1,3 +1,6 @@
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const recipeSection = document.querySelector(".recipes-section");
 
