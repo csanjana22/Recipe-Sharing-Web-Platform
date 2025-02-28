@@ -4,149 +4,196 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Details</title>
-    <link rel="stylesheet" href="style.css"> <!-- Add your CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas"></script>
 </head>
 <body>
-    <div class="recipe-container">
-        <h1 id="recipeTitle"></h1>
-        <img id="recipeImg" src="" alt="Recipe Image">
-        <p><strong>Cuisine:</strong> <span id="recipeCuisine"></span></p>
-        <p><strong>Tags:</strong> <span id="recipeTags"></span></p>
-        <p><strong>Description:</strong> <span id="recipeDescription"></span></p>
-        <h3>Ingredients:</h3>
-        <p id="recipeIngredients"></p>
-        <h3>Steps:</h3>
-        <div id="recipeSteps"></div>
-        <h3>Notes:</h3>
-        <p id="recipeNotes"></p>
-        <div class="timer-container">
-            <h2>Cooking Timer</h2>
-            <div class="clock" id="clock">
-                <div class="hand" id="minuteHand"></div>
-                <div class="hand second-hand" id="secondHand"></div>
-            </div>
-            <br>
-            <div class="timer-input">
-                <label for="minutes">Set Timer (minutes): </label>
-                <input type="number" id="minutes" min="1" value="1">
-                <button onclick="startTimer()">Start</button>
-            </div>
-            <p id="timeLeft">Time Left: 0:00</p>
-
-            <audio id="alarmSound">
-                <source src="alarm-clock-short-6402.mp3" type="audio/wav">
-            </audio>
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+          <a class="navbar-brand logo" href="index.html">
+            <span class="logo-text" style="color: black;">Recipe</span><span class="logo-text" style="color: orange;">Nest</span>
+          </a>
+    
+          <!-- Toggle Button -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <i class="fa-solid fa-bars" style="color: white;"></i>
+          </button>
+    
+          <!-- Navbar Links -->
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link" href="index.html#recipes-section">Explore Recipes</a></li>
+              <li class="nav-item"><a class="nav-link" href="upload.html">Upload Recipe</a></li>
+              <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+              
+            </ul>
+          </div>
         </div>
-        
+      </nav>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Image Section -->
+            <div class="col-md-5">
+                <img id="recipeImg" class="img-fluid rounded" src="" alt="Recipe Image">
+            </div>
+            
+            <!-- Details Section -->
+            <div class="col-md-7">
+                <h1 id="recipeTitle"></h1>
+                <p><strong>Cuisine:</strong> <span id="recipeCuisine"></span></p>
+                <p><strong>Type:</strong> <span id="recipeType"></span></p>
+                <p><strong>Tags:</strong> <span id="recipeTags"></span></p>
+                <p><strong>Description:</strong> <span id="recipeDescription"></span></p>
+            </div>
+        </div>
+
+        <!-- Ingredients Section -->
+        <div class="mt-4">
+            <h3>Ingredients</h3>
+            <ul id="recipeIngredients" class="list-group"></ul>
+        </div>
+
+        <!-- Steps Section -->
+        <div class="mt-4">
+            <h3>Steps</h3>
+            <ol id="recipeSteps"></ol>
+        </div>
+
+        <!-- Timer & Download Section -->
+        <div class="mt-4 d-flex flex-column align-items-center">
+            <div class="timer-container">
+                <h3>Cooking Timer</h3>
+                <div class="timer-input">
+                    <input type="number" id="minutes" min="1" value="1"> 
+                    <button id="startStopBtn" onclick="toggleTimer()">Start</button>
+                </div>
+                <p id="timeLeft">Time Left: 0:00</p>
+            </div>
+            <button class="btn btn-primary mt-3" onclick="downloadRecipe()">Download as Image</button>
+            <button class="btn btn-secondary mt-2" onclick="generateShareableLink()">Generate Share Link</button>
+        </div>
     </div>
-    
-    
-    
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2025 Recipe Sharing Platform</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>Contact us: <a href="mailto:support@recipes.com">support@recipes.com</a></p>
+        </div>
+    </footer>
+  
+
     <script>
-        // Get recipe data from sessionStorage
-        // Get recipe data from sessionStorage
-        const recipeData = JSON.parse(sessionStorage.getItem('recipeData'));
+    document.addEventListener("DOMContentLoaded", function () {
+        let recipeData = {
+            name: "Crispy Masala Dosa",
+            imageUrl:"https://jfwonline.com/wp-content/uploads/2016/11/Plain-dosa-JFW-Article.jpg", 
+            cuisine: "South Indian",
+            type: "Vegetarian",
+            tags: "Breakfast, Healthy, Crispy",
+            description: "A thin, crispy South Indian pancake made from fermented rice and urad dal batter, served with chutney and sambar.",
+            ingredients: "Rice – 2 cups, Urad dal – 1/2 cup, Fenugreek seeds – 1 tsp, Water – as needed, Salt – to taste, Oil – for cooking, Potatoes – 2 (for stuffing), Onions – 1 (chopped), Green chilies – 2 (chopped), Mustard seeds – 1/2 tsp, Turmeric – 1/2 tsp, Curry leaves – few",
+            steps: "Soak & Grind → Soak rice, urad dal, and fenugreek seeds overnight. Grind into a smooth batter. → Ferment → Leave the batter to ferment for 8-10 hours. → Prepare Masala → Heat oil, add mustard seeds, onions, chilies, turmeric, curry leaves, and mashed potatoes. Mix well. → Make Dosa → Heat a pan, pour batter, spread in a circular motion, drizzle oil, and cook until crispy. → Serve → Place potato filling inside, fold, and serve hot with chutney & sambar."
+        };
 
-        if (recipeData) {
-            document.getElementById('recipeTitle').textContent = recipeData.name;
-            document.getElementById('recipeImg').src = recipeData.imageUrl;
-            document.getElementById('recipeCuisine').textContent = recipeData.cuisine;
-            document.getElementById('recipeTags').textContent = recipeData.tags;
-            document.getElementById('recipeDescription').textContent = recipeData.description;
-            document.getElementById('recipeNotes').textContent = recipeData.notes || "No additional notes.";
+        // Save to sessionStorage (Mimic fetching data)
+        sessionStorage.setItem('recipeData', JSON.stringify(recipeData));
 
-             // Ingredients - Convert string into list
-            let ingredientsContainer = document.getElementById('recipeIngredients');
-            ingredientsContainer.innerHTML = "";
-            if (recipeData.ingredients) {
-                const ingredientsArray = recipeData.ingredients.split(',').map(item => item.trim());
-                const ul = document.createElement("ul");
+        const loadedRecipe = JSON.parse(sessionStorage.getItem('recipeData'));
 
-                ingredientsArray.forEach(item => {
-                    if (item) {
-                        const li = document.createElement("li");
-                        li.textContent = item;
-                        ul.appendChild(li);
-                    }
-                });
+        document.getElementById('recipeTitle').textContent = loadedRecipe.name;
+        document.getElementById('recipeImg').src = loadedRecipe.imageUrl;
+        document.getElementById('recipeCuisine').textContent = loadedRecipe.cuisine;
+        document.getElementById('recipeType').textContent = loadedRecipe.type;
+        document.getElementById('recipeTags').textContent = loadedRecipe.tags;
+        document.getElementById('recipeDescription').textContent = loadedRecipe.description;
 
-                ingredientsContainer.appendChild(ul);
-            } else {
-                ingredientsContainer.innerHTML = "<p>No ingredients provided.</p>";
+        const ingredientsContainer = document.getElementById('recipeIngredients');
+        loadedRecipe.ingredients.split(',').forEach(item => {
+            let li = document.createElement("li");
+            li.classList.add("list-group-item");
+            li.innerHTML = `<input type='checkbox'> ${item.trim()}`;
+            ingredientsContainer.appendChild(li);
+        });
+
+        const stepsContainer = document.getElementById('recipeSteps');
+        loadedRecipe.steps.split('→').forEach(step => {
+            let li = document.createElement("li");
+            li.textContent = step.trim();
+            stepsContainer.appendChild(li);
+        });
+    });
+
+    let timerInterval;
+    let isTimerRunning = false;
+
+    function toggleTimer() {
+        let button = document.getElementById("startStopBtn");
+
+        if (!isTimerRunning) {
+            startTimer();
+            button.textContent = "Stop";
+            button.style.backgroundColor = "#dc3545"; // Change to red when running
+        } else {
+            stopTimer();
+            button.textContent = "Start";
+            button.style.backgroundColor = "orange"; // Reset to default color
+        }
+    }
+
+    function startTimer() {
+        clearInterval(timerInterval); // Clear previous timer if any
+        let minutes = document.getElementById("minutes").value;
+        let remainingTime = minutes * 60;
+        isTimerRunning = true;
+
+        timerInterval = setInterval(() => {
+            if (remainingTime <= 0) {
+                clearInterval(timerInterval);
+                alert("Time's up!");
+                isTimerRunning = false;
+                document.getElementById("startStopBtn").textContent = "Start";
+                document.getElementById("startStopBtn").style.backgroundColor = "orange";
+                return;
             }
-            // Convert steps into a bullet list
-            const stepsContainer = document.getElementById('recipeSteps');
-            stepsContainer.innerHTML = ""; // Clear existing content
-
-            // Split steps by '→' and create a list
-            const stepsArray = recipeData.steps.split('→').map(step => step.trim());
-
-            const ul = document.createElement("ul");
-            stepsArray.forEach(step => {
-                if (step) {
-                    const li = document.createElement("li");
-                    li.textContent = step;
-                    ul.appendChild(li);
-                }
-            });
-
-            stepsContainer.appendChild(ul);
-        }
-        let timer;
-        let remainingTime;
-        let alarmSound = document.getElementById("alarmSound");
-
-        function startTimer() {
-            let minutes = document.getElementById("minutes").value;
-            remainingTime = minutes * 60;
-            updateTimerDisplay();
-
-            clearInterval(timer);
-            timer = setInterval(() => {
-                remainingTime--;
-                updateTimerDisplay();
-
-                if (remainingTime <= 0) {
-                    clearInterval(timer);
-                    alarmSound.play();
-                }
-            }, 1000);
-        }
-
-        function updateTimerDisplay() {
             let mins = Math.floor(remainingTime / 60);
             let secs = remainingTime % 60;
-            document.getElementById("timeLeft").textContent = Time Left: ${mins}:${secs.toString().padStart(2, '0')};
-            
-            let minuteDeg = (360 * (mins % 60)) / 60;
-            let secondDeg = (360 * (secs % 60)) / 60;
-            document.getElementById("minuteHand").style.transform = rotate(${minuteDeg}deg);
-            document.getElementById("secondHand").style.transform = rotate(${secondDeg}deg);
-        }
-
-        function addClockDots() {
-    let clock = document.getElementById("clock");
-    for (let i = 0; i < 12; i++) {
-        let dot = document.createElement("div");
-        dot.classList.add("dot");
-        
-        // Correct angle calculation
-        let angle = (i * 30) * (Math.PI / 180);
-        
-        // Proper positioning
-        let x = 47 + Math.cos(angle) * 40; // Centered at 50px
-        let y = 47 + Math.sin(angle) * 40;
-
-        // Set dot position
-        dot.style.left = ${x}%;
-        dot.style.top = ${y}%;
-
-        clock.appendChild(dot);
+            document.getElementById("timeLeft").textContent = `Time Left: ${mins}:${secs.toString().padStart(2, '0')}`;
+            remainingTime--;
+        }, 1000);
     }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+        document.getElementById("timeLeft").textContent = "Time Left: 0:00";
+    }
+
+function downloadRecipe() {
+    let recipeSection = document.querySelector(".container");
+    html2canvas(recipeSection).then(canvas => {
+        let link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "recipe.png";
+        link.click();
+    });
 }
 
-        addClockDots();
 
-    </script>
+
+    function generateShareableLink() {
+    let url = new URL(window.location.href);
+    url.searchParams.set("recipe", encodeURIComponent(sessionStorage.getItem('recipeData')));
+    navigator.clipboard.writeText(url.toString()).then(() => {
+        alert("Shareable link copied to clipboard!");
+    });
+}
+    
+</script>
+
 </body>
 </html>

@@ -1,4 +1,25 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const recipeSection = document.querySelector(".recipes-section");
+
+    function revealOnScroll() {
+        let scrollY = window.scrollY;
+        let viewportHeight = window.innerHeight;
+        let sectionPosition = recipeSection.offsetTop;
+
+        if (scrollY + viewportHeight > sectionPosition + 100) {
+            recipeSection.classList.add("show");
+        }
+      }
+
+    window.addEventListener("scroll", revealOnScroll);
+});
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
     const nextBtn1 = document.querySelector("#recipeForm1 .next-btn");
     const nextBtn2 = document.querySelector("#recipeForm2 .next-btn");
     const nextBtn3 = document.querySelector("#recipeForm3 .next-btn");
@@ -65,6 +86,7 @@ let selectedCuisines = [];
     function selectCuisine(cuisine) {
         if (!selectedCuisines.includes(cuisine)) {
             selectedCuisines.push(cuisine);
+            console.log("Updated Cuisines:", selectedCuisines);
             updateSelectedCuisines();
         }
     }
@@ -127,6 +149,7 @@ add_ing.addEventListener("click",()=>{
     function selectIngredient(ingredient) {
         if (!ingredients.includes(ingredient)) {
             ingredients.push(ingredient);
+            
             updateIngredients();
         }
     }
@@ -185,7 +208,10 @@ add_ing.addEventListener("click",()=>{
                 `;
                 i++
             });
+            
         }
+
+
 
         document.getElementById("file").addEventListener("change", function () {
             const file = this.files[0]; // Get the selected file

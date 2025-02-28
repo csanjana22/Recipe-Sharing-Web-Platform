@@ -26,7 +26,7 @@ a {
 /* Navbar */
 .navbar {
     background-color: white;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Stronger shadow */
     padding: 12px 20px;
     height: 70px;
 }
@@ -437,24 +437,37 @@ select {
     height: 100px;
 }
 
-.modal-body img{
-    object-fit: cover;
-    border-radius: 5px;
-}
 
 
 .recipes-section {
     padding: 50px 20px;
     text-align: center;
     background-color: #f8f9fa;
+    position: relative;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 }
-
+.recipes-section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
 .recipe-card {
     margin-bottom: 20px;
     overflow: hidden;
     border-radius: 10px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
+/* @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+} */
 .recipe-card img {
     height: 30vh;  /* Responsive height: 30% of viewport height */
     object-fit: cover; /* Crop and fit images */
@@ -479,7 +492,8 @@ select {
 }
 
 .recipe-card h3 {
-    font-size: 20px;
+    font-size: 30px;
+    font-weight: 500;
     margin: 10px 0;
     color: #333;
 }
@@ -487,28 +501,28 @@ select {
 /* Cuisine Tag */
 .cuisine {
     font-weight: bold;
-    color: #d35400;
-    font-size: 16px;
+    color: orange;
+    font-size: 17px;
     text-transform: uppercase;
 }
 
 /* Tags Styling */
 .tags {
     color: #555;
-    font-size: 14px;
+    font-size: 15px;
     margin: 5px 0;
 }
 
 /* Description */
 .description {
-    font-size: 14px;
+    font-size: 17px;
     color: #666;
     margin: 10px 0;
 }
 
 /* Button Styling */
 .details-btn {
-    background: #ff6b35;
+    background: orange;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -519,21 +533,22 @@ select {
 }
 
 .details-btn:hover {
-    background: #e65100;
+    background: rgb(206, 138, 13);
 }
 .recipe-btn {
     display: inline-block;
-    background-color: #ff5722; /* A warm orange shade */
+    background-color: orange; /* A warm orange shade */
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    transition: 0.3s ease;
+    transition: 0.3s ease-in-out;
 }
 
 .recipe-btn:hover {
-    background-color: #e64a19; /* Darker shade on hover */
+    background-color: rgb(206, 138, 13); /* Darker shade on hover */
+    transform: scale(1.1);
 }
 
 

@@ -23,9 +23,9 @@
           <!-- Navbar Links -->
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-              <li class="nav-item"><a class="nav-link" href="#">Explore Recipes</a></li>
+              <li class="nav-item"><a class="nav-link" href="index.html#recipes-section">Explore Recipes</a></li>
               <li class="nav-item"><a class="nav-link" href="upload.html">Upload Recipe</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+              <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
               
             </ul>
           </div>
@@ -146,7 +146,7 @@
                         <textarea id="step" rows="2" placeholder="Enter the steps"></textarea>
                     </div>
                     <div class="instructions" id="instructions"></div> 
-                    <button type="button" class="add-btn" onclick="addStep()">Add Step</button>  
+                    <button type="button" class="add-btn add-step" onclick="addStep()">Add Step</button>  
                     <div class="buttons">
                         <button type="button" class="back-btn">Back</button>
                         <button type="button" class="next-btn">Next</button>
@@ -175,8 +175,88 @@
                 
             </div>
         </div>
+        <footer>
+            <div class="footer-container">
+                <p>&copy; 2025 Recipe Sharing Platform</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+                <p>Contact us: <a href="mailto:support@recipes.com">support@recipes.com</a></p>
+            </div>
+        </footer>
+      
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
+    <!-- <script>document.addEventListener("DOMContentLoaded", function () {
+        let recipeData = {
+            title: "",
+            description: "",
+            cuisine: "",
+            type: "",
+            tags: [],
+            caption: "",
+            ingredients: [],
+            steps: [],
+            image: null
+        };
+    
+        // Step 1: Capture basic information
+        document.querySelector("#recipeForm1 .next-btn").addEventListener("click", function () {
+            recipeData.title = document.getElementById("title").value;
+            recipeData.description = document.getElementById("description").value;
+            recipeData.type = document.querySelector("input[name='type']:checked").value;
+    
+            console.log("Step 1 Data:", recipeData);
+        });
+    
+        // Step 2: Capture tags and caption
+        document.querySelector("#recipeForm2 .next-btn").addEventListener("click", function () {
+            recipeData.caption = document.getElementById("caption").value;
+            console.log("Step 2 Data:", recipeData);
+        });
+    
+        // Step 3: Capture ingredients and steps
+        function addIngredient() {
+            let ingredientInput = document.getElementById("ingredients");
+            if (ingredientInput.value) {
+                recipeData.ingredients.push(ingredientInput.value);
+                ingredientInput.value = "";
+                console.log("Ingredients:", recipeData.ingredients);
+            }
+        }
+    
+        function addStep() {
+            let stepInput = document.getElementById("step");
+            if (stepInput.value) {
+                recipeData.steps.push(stepInput.value);
+                stepInput.value = "";
+                console.log("Steps:", recipeData.steps);
+            }
+        }
+    
+        document.querySelector("#recipeForm3 .next-btn").addEventListener("click", function () {
+            console.log("Step 3 Data:", recipeData);
+        });
+    
+        // Step 4: Capture image
+        document.getElementById("file").addEventListener("change", function (event) {
+            let file = event.target.files[0];
+            if (file && file.type.startsWith("image/")) {
+                recipeData.image = file.name;
+                console.log("Selected Image:", recipeData.image);
+            } else {
+                document.getElementById("file-error").style.display = "block";
+            }
+        });
+    
+        // Final submission
+        document.querySelector("#recipeForm4 .next-btn").addEventListener("click", function () {
+            console.log("Final Recipe Data:", recipeData);
+        });
+    });
+    </script> -->
 </body>
 </html>
