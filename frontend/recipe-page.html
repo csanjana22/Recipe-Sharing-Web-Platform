@@ -55,16 +55,27 @@
             <h3>Steps</h3>
             <ol id="recipeSteps"></ol>
         </div>
-        <div class="timer-container">
+        <!-- <div class="timer-container">
             <h3>Cooking Timer</h3>
             <div class="timer-input">
                 <input type="number" id="minutes" min="1" value="1"> 
                 <button id="startStopBtn" class="btn btn-primary" onclick="toggleTimer()">Start</button>
             </div>
             <p id="timeLeft">Time Left: 0:00</p>
+        </div> -->
+        <div class="timer-container">
+            <h3>Cooking Timer</h3>
+            <div class="timer-input">
+                <input type="number" id="minutes" min="1" value="1"> 
+                <button id="startStopBtn" onclick="toggleTimer()">Start</button>
+            </div>
+            <p id="timeLeft">Time Left: 0:00</p>
+            <div class="clock">
+                <div class="hand" id="hand"></div>
+            </div>
+            <audio id="alarm" src="alarm.mp3"></audio>
         </div>
-        <button class="btn btn-primary" onclick="downloadRecipe()">Download as Image</button>
-        <button class="btn btn-secondary" onclick="generateShareableLink()">Generate Share Link</button>
+        
     </div>
     <footer>
         <div class="footer-container">
@@ -121,50 +132,97 @@
         });
     });
 
-    let timerInterval;
-    let isTimerRunning = false;
+    // let timerInterval;
+    // let isTimerRunning = false;
 
-    function toggleTimer() {
-        let button = document.getElementById("startStopBtn");
+    // function toggleTimer() {
+    //     let button = document.getElementById("startStopBtn");
 
-        if (!isTimerRunning) {
-            startTimer();
-            button.textContent = "Stop";
-            button.style.backgroundColor = "#dc3545"; // Change to red when running
-        } else {
-            stopTimer();
-            button.textContent = "Start";
-            button.style.backgroundColor = "orange"; // Reset to default color
-        }
-    }
+    //     if (!isTimerRunning) {
+    //         startTimer();
+    //         button.textContent = "Stop";
+    //         button.style.backgroundColor = "#dc3545"; // Change to red when running
+    //     } else {
+    //         stopTimer();
+    //         button.textContent = "Start";
+    //         button.style.backgroundColor = "orange"; // Reset to default color
+    //     }
+    // }
 
-    function startTimer() {
-        clearInterval(timerInterval); // Clear previous timer if any
-        let minutes = document.getElementById("minutes").value;
-        let remainingTime = minutes * 60;
-        isTimerRunning = true;
+    // function startTimer() {
+    //     clearInterval(timerInterval); // Clear previous timer if any
+    //     let minutes = document.getElementById("minutes").value;
+    //     let remainingTime = minutes * 60;
+    //     isTimerRunning = true;
 
-        timerInterval = setInterval(() => {
-            if (remainingTime <= 0) {
-                clearInterval(timerInterval);
-                alert("Time's up!");
-                isTimerRunning = false;
+    //     timerInterval = setInterval(() => {
+    //         if (remainingTime <= 0) {
+    //             clearInterval(timerInterval);
+    //             alert("Time's up!");
+    //             isTimerRunning = false;
+    //             document.getElementById("startStopBtn").textContent = "Start";
+    //             document.getElementById("startStopBtn").style.backgroundColor = "orange";
+    //             return;
+    //         }
+    //         let mins = Math.floor(remainingTime / 60);
+    //         let secs = remainingTime % 60;
+    //         document.getElementById("timeLeft").textContent = `Time Left: ${mins}:${secs.toString().padStart(2, '0')}`;
+    //         remainingTime--;
+    //     }, 1000);
+    // }
+
+    // function stopTimer() {
+    //     clearInterval(timerInterval);
+    //     isTimerRunning = false;
+    //     document.getElementById("timeLeft").textContent = "Time Left: 0:00";
+    // }
+    let timer;
+        let timeRemaining;
+        let totalTime;
+        let running = false;
+        const hand = document.getElementById("hand");
+        const alarm = document.getElementById("alarm");
+
+        function toggleTimer() {
+            if (running) {
+                clearInterval(timer);
                 document.getElementById("startStopBtn").textContent = "Start";
-                document.getElementById("startStopBtn").style.backgroundColor = "orange";
-                return;
+            } else {
+                startTimer();
+                document.getElementById("startStopBtn").textContent = "Stop";
             }
-            let mins = Math.floor(remainingTime / 60);
-            let secs = remainingTime % 60;
-            document.getElementById("timeLeft").textContent = `Time Left: ${mins}:${secs.toString().padStart(2, '0')}`;
-            remainingTime--;
-        }, 1000);
-    }
+            running = !running;
+        }
 
-    function stopTimer() {
-        clearInterval(timerInterval);
-        isTimerRunning = false;
-        document.getElementById("timeLeft").textContent = "Time Left: 0:00";
-    }
+        function startTimer() {
+            let minutes = document.getElementById("minutes").value;
+            totalTime = minutes * 60;
+            timeRemaining = totalTime;
+            updateClock();
+            timer = setInterval(() => {
+                if (timeRemaining > 0) {
+                    timeRemaining--;
+                    updateClock();
+                } else {
+                    clearInterval(timer);
+                    playAlarm();
+                    document.getElementById("startStopBtn").textContent = "Start";
+                    running = false;
+                }
+            }, 1000);
+        }
+
+        function updateClock() {
+            let minutes = Math.floor(timeRemaining / 60);
+            let seconds = timeRemaining % 60;
+            document.getElementById("timeLeft").textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            let rotation = 360 - ((timeRemaining / totalTime) * 360);
+            hand.style.transform = `translate(-50%, -100%) rotate(${rotation}deg)`;
+        }
+        function playAlarm() {
+            alarm.currentTime = 0; // Ensure the sound starts from the beginning
+            alarm.play().catch(error => console.log("Audio playback failed:", error));
+        }
 
 function downloadRecipe() {
     let recipeSection = document.querySelector(".container");

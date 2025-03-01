@@ -202,7 +202,11 @@ a {
     transform: scale(1.05);
     opacity: 0.9;
 }
-
+@media (max-width:500px){
+    .container{
+        flex-direction:column;
+    }
+}
 /* Form Section */
 .form-section {
     flex: 1;

@@ -132,7 +132,7 @@ a {
 .list-group, ol {
     padding-left: 20px;
 }
-.timer-container {
+/*.timer-container {
     text-align: center;
     margin-top: 20px;
 }
@@ -142,6 +142,29 @@ a {
 .timer-input input {
     width: 50px;
     padding: 5px;
+}*/
+.timer-container {
+    text-align: center;
+    margin-top: 20px;
+}
+.clock {
+    width: 200px;
+    height: 200px;
+    border: 5px solid black;
+    border-radius: 50%;
+    position: relative;
+    margin: 20px auto;
+}
+.hand {
+    width: 4px;
+    height: 80px;
+    background: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: bottom;
+    transform: translate(-50%, -100%) rotate(0deg);
+    transition: transform 1s linear;
 }
 .btn {
     padding: 10px 15px;
@@ -157,7 +180,19 @@ a {
     background-color: #6c757d;
     color: white;
 }
-
+/* .buttons {
+    font-size: 18px;
+    padding: 5px 13px;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+    font-weight: 700;
+    transition: background-color 0.3s ease-in-out, transform 0.2s;
+} */
+.buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 
 /* footer */
