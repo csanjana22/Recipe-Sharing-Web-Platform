@@ -75,7 +75,10 @@
             </div>
             <audio id="alarm" src="alarm.mp3"></audio>
         </div>
-        
+        <div class="buttons">
+            <button class="btn btn-primary" onclick="downloadRecipe()">Download as Image</button>
+            <button class="btn btn-secondary" onclick="generateShareableLink()">Generate Share Link</button>
+        </div>
     </div>
     <footer>
         <div class="footer-container">
@@ -218,10 +221,6 @@
             document.getElementById("timeLeft").textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
             let rotation = 360 - ((timeRemaining / totalTime) * 360);
             hand.style.transform = `translate(-50%, -100%) rotate(${rotation}deg)`;
-        }
-        function playAlarm() {
-            alarm.currentTime = 0; // Ensure the sound starts from the beginning
-            alarm.play().catch(error => console.log("Audio playback failed:", error));
         }
 
 function downloadRecipe() {

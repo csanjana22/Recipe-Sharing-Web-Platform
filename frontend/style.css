@@ -192,6 +192,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 
@@ -237,3 +238,5 @@ footer a:hover {
 footer p{
     margin: 0;
 }
+
+
