@@ -522,6 +522,18 @@ select {
     transform: scale(1.1);
 }
 
+/* Ensure wrapper takes full height */
+.wrapper {
+    min-height: 100vh; /* Ensures full viewport height */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Make main section grow to push footer down */
+main {
+    flex-grow: 1;
+}
+
 
 /* footer */
 footer {
@@ -563,4 +575,10 @@ footer a:hover {
 }
 footer p{
     margin: 0;
+}
+/* Center align the heading */
+.search-results-heading {
+    text-align: center; /* Centers text */
+    width: 100%; /* Ensures full width */
+    margin: 20px 0; /* Adds vertical spacing */
 }
